@@ -65,7 +65,14 @@ d3.json("/build-graph").then( function( data) {
       .on("mouseout", function(d,i) {
         d3.select(this).style("stroke", checkIfPathNode(i) ? "#0026ff" : "").style("stroke-width", checkIfPathNode(i) ? "2" : "0");
       })
-      .on("click", (e, i) => console.log(i))
+      .on("click", (e, i) => {
+            let nodeIndex = selected_path.nodes.findIndex((n) => n.id === i.id);
+            if(nodeIndex === -1){
+                selected_path.nodes.push({ id: i.id, name: i.name });
+            } else {
+                selected_path.nodes.splice(nodeIndex, 1);
+            }
+        })
       .style("fill", "#69b3a2")
       .style("stroke", d => checkIfPathNode(d) ? "#0026ff" : "")
       .style("stroke-width", d => checkIfPathNode(d) ? "2" : "0");
