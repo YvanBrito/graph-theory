@@ -13,19 +13,43 @@ const svg = d3.select("#my_dataviz")
 const selected_path = {
     nodes: [
         {
+            id: 0,
+            name: "A"
+        },
+        {
+            id: 1,
+            name: "B"
+        },
+        {
             id: 4,
             name: "E"
         },
         {
             id: 7,
             name: "H"
+        },
+        {
+            id: 8,
+            name: "I"
         }
     ],
     links: [
         {
+            source: 0,
+            target: 1
+        },
+        {
+            source: 1,
+            target: 4
+        },
+        {
             source: 4,
             target: 7
-        }
+        },
+        {
+            source: 7,
+            target: 8
+        },
     ]
 }
 
@@ -42,7 +66,6 @@ checkIfPathLink = ({source, target}) => {
 }
 
 d3.json("/build-graph").then( function( data) {
-
   const link = svg
     .selectAll("line")
     .data(data.links)

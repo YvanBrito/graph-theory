@@ -22,13 +22,13 @@ type Graph struct {
 }
 
 func main() {
+	matrix := buildGraph()
 	fs := http.FileServer(http.Dir("./static"))
 
 	mux := http.NewServeMux()
 	mux.Handle("/", fs)
 
 	mux.HandleFunc("/build-graph", func(w http.ResponseWriter, r *http.Request) {
-		matrix := buildGraph()
 		graph := convertMatrixToStruct(matrix)
 
 		w.Header().Set("Content-Type", "application/json")
